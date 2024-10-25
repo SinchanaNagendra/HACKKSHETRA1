@@ -1,0 +1,120 @@
+body {
+    font-family: 'Arial', sans-serif;
+    background: linear-gradient(to bottom right, #e0eafc, #cfdef3); /* Soft gradient background */
+    margin: 0;
+    padding: 20px;
+}
+
+h1 {
+    text-align: center; /* Center the main title */
+    margin-bottom: 30px; /* Space below the title */
+    font-size: 48px; /* Larger font size */
+    color: #333; /* Dark color for contrast */
+    text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.2); /* Stronger shadow for depth */
+}
+
+.parking-lot-wrapper {
+    display: flex; 
+    height: calc(100vh - 60px); /* Adjust height based on title */
+    justify-content: space-around; /* Space out the lots */
+    padding-left: 10%; /* Shift lots slightly to the left */
+}
+
+.container {
+    flex: 1; 
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    margin: 0 20px; /* Add margin between containers */
+    background: rgba(255, 255, 255, 0.9); /* Semi-transparent background */
+    border-radius: 20px; /* More rounded corners */
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2); /* Stronger shadow for depth */
+    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth transition for hover effect */
+}
+
+.container:hover {
+    transform: translateY(-15px); /* Lift effect on hover */
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3); /* Stronger shadow on hover */
+}
+
+.parking-lot {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 15px; /* Increase gap for a more spacious feel */
+    margin: 20px 0;
+}
+
+.slot {
+    width: 100px;
+    height: 100px;
+    border: 2px solid #ccc;
+    border-radius: 15px; /* More rounded corners */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    cursor: pointer;
+    position: relative; /* For pseudo-element positioning */
+    transition: all 0.3s ease; /* Smooth transition for effects */
+    overflow: hidden; /* Hide overflow for 3D effect */
+}
+
+.slot::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(255, 255, 255, 0.2); /* Light overlay */
+    opacity: 0;
+    transition: opacity 0.3s ease; /* Fade-in effect */
+    border-radius: 15px; /* Match slot's border radius */
+}
+
+.slot:hover::before {
+    opacity: 1; /* Show overlay on hover */
+}
+
+.available {
+    background: linear-gradient(135deg, #d4edda, #c3e6cb); /* Gradient for available slots */
+    border-color: #c3e6cb; /* Darker green for border */
+    box-shadow: 0 4px 20px rgba(0, 255, 0, 0.3); /* Green glow effect */
+    animation: pulse 1.5s infinite; /* Pulsing effect */
+}
+
+.occupied {
+    background: linear-gradient(135deg, #f8d7da, #f5c6cb); /* Gradient for occupied slots */
+    border-color: #f5c6cb; /* Darker red for border */
+    box-shadow: 0 4px 20px rgba(255, 0, 0, 0.3); /* Red glow effect */
+    animation: shake 0.5s ease-in-out; /* Shake effect */
+}
+
+/* Keyframe animations */
+@keyframes pulse {
+    0%, 100% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.05);
+    }
+}
+
+@keyframes shake {
+    0% { transform: translateX(0); }
+    25% { transform: translateX(-5px); }
+    50% { transform: translateX(5px); }
+    75% { transform: translateX(-5px); }
+    100% { transform: translateX(0); }
+}
+
+/* Add icons to slots */
+.slot:after {
+    content: attr(data-status);
+    font-size: 18px; /* Smaller font size for icons */
+    color: #fff; /* White color for icons */
+    position: absolute;
+    bottom: 10px; /* Position at the bottom */
+}
